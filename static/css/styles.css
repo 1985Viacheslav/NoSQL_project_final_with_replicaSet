@@ -1,0 +1,134 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+}
+
+.glass-container {
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    max-width: 400px;
+    width: 300px;
+    margin: auto;
+}
+
+.glass-container.main {
+    width: auto;
+    max-width: unset;
+}
+
+input[type="text"],
+input[type="submit"],
+.result-item {
+    background: rgba(255, 255, 255, 0.75);
+    border-radius: 5px;
+    padding: 10px;
+}
+
+input[type="text"],
+input[type="submit"] {
+    margin-bottom: 15px;
+    border: none;
+}
+
+input[type="submit"] {
+    color: #fff;
+    background-color: #556cd6;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover {
+    background-color: #404e9c;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.3);
+    padding: 10px 15px;
+    margin: 0 10px;
+    display: inline-block;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+a:hover {
+    background: rgba(255, 255, 255, 0.45);
+}
+
+h1, h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.result-item h3 {
+    margin-top: 0;
+}
+
+button,
+input {
+    width: -webkit-fill-available;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+}
+
+button {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px 20px;
+    margin: 10px 0;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.date-fields {
+    display: flex;
+    justify-content: space-between;
+}
+
+.date-field {
+    width: 48%;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.date-label {
+    margin-right: 10px;
+}
+
+.date-input {
+    width: auto;
+    margin-top: 5px;
+}
+
+.header {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+    background-color: #f0f0f0;
+}
+
+.header button {
+    margin-left: 10px;
+    padding: 5px 10px;
+    background-color: #556cd6;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}

@@ -1,0 +1,4 @@
+network.host: 0.0.0.0
+cluster.name: docker-cluster
+# Отключение X-Pack Security (безопасности)
+xpack.security.enabled: false

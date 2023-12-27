@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Поиск комнаты</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
+</head>
+<body>
+    <header>
+        <p>Привет, {{ username }}!</p>
+    </header>
+    <div class="glass-container">
+        <h2>Поиск доступных комнат</h2>
+        <form method="get" action="/search/">
+            <input type="text" name="query" placeholder="Поиск...">
+            <input type="submit" value="Поиск">
+        </form>
+        <button onclick="window.history.back();">Назад</button>
+        <button onclick="window.location.href='/'">Вернуться на главную</button>
+    </div>
+</body>
+</html>

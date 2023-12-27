@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Бронирование Комнаты</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
+</head>
+<body>
+    <header>
+        <p>Привет, {{ username }}!</p>
+    </header>
+    <div class="glass-container">
+        <h2>Форма Бронирования</h2>
+        <form method="post">
+            <input type="text" name="name" placeholder="Ваше имя">
+            <input type="text" name="room_id" placeholder="Номер комнаты">
+            <div class="date-fields">
+                <div class="date-field">
+                    <label for="date_start">Дата заезда:</label>
+                    <input class="date-input" type="date" name="date_start" id="date_start">
+                </div>
+                <div class="date-field">
+                    <label for="date_end">Дата выезда:</label>
+                    <input class="date-input" type="date" name="date_end" id="date_end">
+                </div>
+            </div>
+            <button type="submit">Забронировать</button>
+        </form>
+        <button onclick="window.history.back();">Назад</button>
+        <button onclick="window.location.href='/'">Вернуться на главную</button>
+    </div>
+</body>
+</html>

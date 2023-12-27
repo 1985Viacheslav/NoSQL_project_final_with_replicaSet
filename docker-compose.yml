@@ -1,0 +1,97 @@
+version: '3.8'
+
+services:
+  # Конфигурационные серверы
+  mongodb:
+    image: mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongo_user
+      MONGO_INITDB_ROOT_PASSWORD: mongo_password
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.2
+    restart: always
+    ports:
+      - "9200:9200"
+    environment:
+      - discovery.type=single-node
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+      - ./elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    depends_on:
+      - mongodb
+
+  hazelcast:
+    image: hazelcast/hazelcast:4.0
+    ports:
+      - "5701:5701"
+    volumes:
+      - hazelcast_data:/data/hazelcast
+
+  nginx:
+    image: nginx
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - webapp_1
+      - webapp_2
+      - webapp_3
+      - webapp_4
+
+  db_initializer:
+    restart: on-failure
+    build: .
+    command: python init_db.py
+    depends_on:
+      - mongodb
+      - elasticsearch
+
+  webapp_1:
+    build: .
+    restart: always
+    depends_on:
+      - mongodb
+      - elasticsearch
+      - hazelcast
+      - db_initializer
+
+  webapp_2:
+    build: .
+    restart: always
+    depends_on:
+      - mongodb
+      - elasticsearch
+      - hazelcast
+      - db_initializer
+
+  webapp_3:
+    build: .
+    restart: always
+    depends_on:
+      - mongodb
+      - elasticsearch
+      - hazelcast
+      - db_initializer
+
+  webapp_4:
+    build: .
+    restart: always
+    depends_on:
+      - mongodb
+      - elasticsearch
+      - hazelcast
+      - db_initializer
+
+volumes:
+  elasticsearch_data:
+  hazelcast_data:
+  mongodb_data:

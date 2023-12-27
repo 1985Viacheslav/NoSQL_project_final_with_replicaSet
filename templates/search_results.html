@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Результаты поиска</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
+</head>
+<body>
+    <div class="glass-container">
+        <h2>Результаты поиска</h2>
+        {% for result in results %}
+        <div class="result-item">
+            <h3>{{ result['_source']['name'] }}</h3>
+            <p>Адрес: {{ result['_source']['_id'] }}</p>
+        </div>
+        {% endfor %}
+        <button onclick="window.history.back();">Назад</button>
+        <button onclick="window.location.href='/'">Вернуться на главную</button>
+    </div>
+</body>
+</html>

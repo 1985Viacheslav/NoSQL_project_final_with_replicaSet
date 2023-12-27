@@ -1,0 +1,5 @@
+http://insideairbnb.com/get-the-data/
+Chicago, Illinois, United States
+12 September, 2023
+
+Chicago	listings.csv	Summary information and metrics for listings in Chicago (good for visualisations).

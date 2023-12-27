@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Главная Страница</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
+</head>
+<body>
+    <header>
+        <p>Привет, {{ username }}!</p>
+    </header>
+    <div class="glass-container main">
+        <h1>Добро пожаловать в <br>Систему Бронирования Комнат</h1>
+        <a href="/booking">Бронирование комнаты</a> | 
+        <a href="/search">Поиск комнаты</a>
+    </div>
+    <div style="color: red; position: absolute; top: 0; right: 0; padding: 10px;">
+        {{ db_status | safe }}
+    </div>
+</body>
+</html>

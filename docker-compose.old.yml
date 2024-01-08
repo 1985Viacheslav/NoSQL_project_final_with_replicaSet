@@ -2,34 +2,16 @@ version: '3.8'
 
 services:
   # Конфигурационные серверы
-  mongo1:
+  mongodb:
     image: mongo
+    restart: always
     ports:
       - "27017:27017"
     volumes:
       - mongodb_data:/data/db
-    command: mongod --replSet rs0 --bind_ip localhost,mongo1
-    networks:
-      - mongo-cluster
-#    environment:
-#      MONGO_INITDB_ROOT_USERNAME: mongo_user
-#      MONGO_INITDB_ROOT_PASSWORD: mongo_password
-
-  mongo2:
-    image: mongo
-    ports:
-      - "27018:27017"
-    command: mongod --replSet rs0 --bind_ip localhost,mongo2
-    networks:
-      - mongo-cluster
-
-  mongo3:
-    image: mongo
-    ports:
-      - "27019:27017"
-    command: mongod --replSet rs0 --bind_ip localhost,mongo3
-    networks:
-      - mongo-cluster
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongo_user
+      MONGO_INITDB_ROOT_PASSWORD: mongo_password
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.11.2
@@ -43,11 +25,7 @@ services:
       - elasticsearch_data:/usr/share/elasticsearch/data
       - ./elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
     depends_on:
-      - mongo1
-      - mongo2
-      - mongo3
-    networks:
-      - mongo-cluster
+      - mongodb
 
   hazelcast:
     image: hazelcast/hazelcast:4.0
@@ -55,8 +33,6 @@ services:
       - "5701:5701"
     volumes:
       - hazelcast_data:/data/hazelcast
-    networks:
-      - mongo-cluster
 
   nginx:
     image: nginx
@@ -70,76 +46,50 @@ services:
       - webapp_2
       - webapp_3
       - webapp_4
-    networks:
-      - mongo-cluster
 
   db_initializer:
     restart: on-failure
     build: .
     command: python init_db.py
     depends_on:
-      - mongo1
-      - mongo2
-      - mongo3
+      - mongodb
       - elasticsearch
-    networks:
-      - mongo-cluster
 
   webapp_1:
     build: .
     restart: always
     depends_on:
-      - mongo1
-      - mongo2
-      - mongo3
+      - mongodb
       - elasticsearch
       - hazelcast
       - db_initializer
-    networks:
-      - mongo-cluster
 
   webapp_2:
     build: .
     restart: always
     depends_on:
-      - mongo1
-      - mongo2
-      - mongo3
+      - mongodb
       - elasticsearch
       - hazelcast
       - db_initializer
-    networks:
-      - mongo-cluster
 
   webapp_3:
     build: .
     restart: always
     depends_on:
-      - mongo1
-      - mongo2
-      - mongo3
+      - mongodb
       - elasticsearch
       - hazelcast
       - db_initializer
-    networks:
-      - mongo-cluster
 
   webapp_4:
     build: .
     restart: always
     depends_on:
-      - mongo1
-      - mongo2
-      - mongo3
+      - mongodb
       - elasticsearch
       - hazelcast
       - db_initializer
-    networks:
-      - mongo-cluster
-
-networks:
-  mongo-cluster:
-    driver: bridge
 
 volumes:
   elasticsearch_data:

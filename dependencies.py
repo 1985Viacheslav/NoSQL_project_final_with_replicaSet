@@ -11,7 +11,7 @@ from pydantic import BaseModel
 
 DATABASE_RESET = True
 
-MONGO_URL = "mongodb://mongo_user:mongo_password@mongodb:27017/"
+MONGO_URL = "mongodb://mongo1:27017,mongo2:27018,mongo3:27019/?replicaSet=rs0"
 MONGO_DB = "booking_db"
 
 def get_db():

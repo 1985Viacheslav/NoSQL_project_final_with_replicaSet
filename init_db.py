@@ -12,9 +12,11 @@ def random_dates(start, end, n=1):
     return [datetime.fromtimestamp(random.uniform(start_u, end_u)) for _ in range(n)]
 
 def initialize_db(reset=True):
+
     # Подключение к MongoDB
     client = MongoClient(MONGO_URL)
     db = client[MONGO_DB]
+
 
     # Очистка коллекций при необходимости
     if reset:
